@@ -1,8 +1,8 @@
 #include <bluetooth.h>
 #include <motor.h>
-#include <HallEffectSensor.h>
+#include <sensor.h>
 
-void InitializeUART()
+void InitializePins()
 {
 
     // Software reset enabled. USCI logic held in reset state.
@@ -33,17 +33,18 @@ void InitializeUART()
     SET_CONFIG_AS_AN_OUTPUT;
     SET_NFAULT_AS_AN_INPUT;
 
+    // need to configure Reset and EN pins for bluetooth
+
     // Hall Effect Sensor
     SET_SENSOR_AS_AN_INPUT;
 
-    UCA0TXBUF = 0;                  // initialize transmit buffer to 0
+    UCA0TXBUF = 0; // initialize transmit buffer to 0
 
-    //UCA0IE |= UCRXIE;
+    UCA0CTL1 &= ~UCSWRST;   // Initialize eUSCI
 
-    UCA0CTL1 &= ~UCSWRST;                    // Initialize eUSCI
-    UCA0IE |= UCRXIE;                         // Enable USCI_A0 RX interrupt
+    UCA0IE |= UCRXIE;   // Enable USCI_A0 RX interrupt
 
-    P1IE |= SENSOR_BIT;               // ENABLE HallEffectSensor Interrupt
+    P1IE |= SENSOR_BIT; // Enable HallEffectSensor Interrupt
     P1IES |= SENSOR_BIT; // make interrupt falling edge
     P1IFG &= ~SENSOR_BIT; // Clear interrupt flag
 

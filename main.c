@@ -1,14 +1,15 @@
 #include <bluetooth.h>
 #include <msp430.h>
 #include <motor.h>
-#include <HallEffectSensor.h>
 #include <MSP430FR2xx_4xx/driverlib.h>
+#include <sensor.h>
 
 volatile unsigned char ReceivedValue = '\0';
 volatile bool loggedIn = false;
 int num_turns;
 
 void exitFunction(void);
+void motorTurns(int turns);
 
 int main(void)
 {
@@ -24,7 +25,7 @@ int main(void)
     //ConfigureClockModule();
 
     //initClockTo16MHz();
-    InitializeUART(); // initializes blue tooth connection with msp
+    InitializePins(); // initializes bluetooth, sensor, and motor connection with msp
 
     //USCIA0_RESET_PORT |= USCIA0_RESET_BIT;
 
@@ -41,52 +42,40 @@ int main(void)
 ////            P1OUT ^= BIT0;                      // P1.0 = toggle
 //        }
 
-    // Motor Code
-      num_turns = 3;
 
-      ENABLE_SLEEP; //set sleep high
-      LOW_NENBL; // set enable to low to turn on
-      ENABLE_CONFIG;
-      ENABLE_DIR;
-      LOW_M0;
-      LOW_M1;
-      DISABLE_STEP;
-//      int i;
-//      for (i = 0; i < 5; i++ )
-      while(num_turns){
-          DISABLE_STEP;
-          _delay_cycles(10000);
-          ENABLE_STEP;
-          _delay_cycles(10000);
-      }
-      DISABLE_STEP;
-      HIGH_NENBL;
-
-       return 0;
-
-    // Bluetooth Code
    while(1){
+       ENABLE_SLEEP; //set sleep high
+       LOW_NENBL; // set enable to low to turn on
+       ENABLE_CONFIG;
+       ENABLE_DIR;
+       LOW_M0;
+       LOW_M1;
+       DISABLE_STEP;
            // read user input
-        while (!loggedIn);
+//        while (!loggedIn);
 
-        UARTSendString("Please select what size you would like: (s for Small, m for Medium, l for Large, and x to Exit)\r\n");
+//        UARTSendString("Please select what size you would like: (s for Small, m for Medium, l for Large, and x to Exit)\r\n");
 
         while (ReceivedValue == '\0');
 
         switch (ReceivedValue){
             case 's':
-                UARTSendString("Dispensing a Small serving\r\n");
                 ReceivedValue = '\0';
+                motorTurns(1);
+                UARTSendString("Dispensed a Small serving\r\n");
                 exitFunction();
                 break;
             case 'm':
-                UARTSendString("Dispensing a Medium serving\n\r");
+
                 ReceivedValue = '\0';
+                motorTurns(2);
+                UARTSendString("Dispensed a Medium serving\n\r");
                 exitFunction();
                 break;
             case 'l':
-                UARTSendString("Dispensing a Large serving\n\r");
                 ReceivedValue = '\0';
+                motorTurns(3);
+                UARTSendString("Dispensing a Large serving\n\r");
                 exitFunction();
                 break;
             case 'x':
@@ -102,9 +91,20 @@ int main(void)
 
 }
 
+void motorTurns(int turns){
+    while(num_turns){
+        DISABLE_STEP;
+        _delay_cycles(10000);
+        ENABLE_STEP;
+        _delay_cycles(10000);
+    }
+    DISABLE_STEP;
+    HIGH_NENBL;
+    return;
+}
+
 void exitFunction() {
-    UARTSendString("Disconnecting your device...\r\n");
-    UARTSendString("AT");
+    UARTSendString("Please disconnect your device...\r\n");
     loggedIn = false;
     return;
 }

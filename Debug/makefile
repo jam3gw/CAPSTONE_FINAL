@@ -8,7 +8,7 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
-"./bluetooth.obj" \
+"./bluetooth_motor_sensor_setup.obj" \
 "./main.obj" \
 "./MSP430FR2xx_4xx/adc.obj" \
 "./MSP430FR2xx_4xx/crc.obj" \
@@ -33,7 +33,7 @@ ORDERED_OBJS += \
 "./MSP430FR2xx_4xx/timer_b.obj" \
 "./MSP430FR2xx_4xx/tlv.obj" \
 "./MSP430FR2xx_4xx/wdt_a.obj" \
-"../lnk_msp430fr2111.cmd" \
+"../lnk_msp430fr2311.cmd" \
 $(GEN_CMDS__FLAG) \
 -llibc.a \
 
@@ -164,7 +164,7 @@ all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 CAPSTONE_FINAL.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: MSP430 Linker'
-	"/Applications/ti/ccs1011/ccs/tools/compiler/ti-cgt-msp430_20.2.1.LTS/bin/cl430" -vmspx --use_hw_mpy=none --advice:power=all --advice:hw_config=all --define=__MSP430FR2111__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 -z -m"CAPSTONE_FINAL.map" --heap_size=160 --stack_size=160 --cinit_hold_wdt=on -i"/Applications/ti/ccs1011/ccs/ccs_base/msp430/include" -i"/Applications/ti/ccs1011/ccs/tools/compiler/ti-cgt-msp430_20.2.1.LTS/lib" -i"/Applications/ti/ccs1011/ccs/tools/compiler/ti-cgt-msp430_20.2.1.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="CAPSTONE_FINAL_linkInfo.xml" --use_hw_mpy=none --rom_model -o "CAPSTONE_FINAL.out" $(ORDERED_OBJS)
+	"/Applications/ti/ccs1011/ccs/tools/compiler/ti-cgt-msp430_20.2.1.LTS/bin/cl430" -vmspx --use_hw_mpy=none --advice:power=all --advice:hw_config=all --define=__MSP430FR2311__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 -z -m"CAPSTONE_FINAL.map" --heap_size=160 --stack_size=160 --cinit_hold_wdt=on -i"/Applications/ti/ccs1011/ccs/ccs_base/msp430/include" -i"/Applications/ti/ccs1011/ccs/tools/compiler/ti-cgt-msp430_20.2.1.LTS/lib" -i"/Applications/ti/ccs1011/ccs/tools/compiler/ti-cgt-msp430_20.2.1.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="CAPSTONE_FINAL_linkInfo.xml" --use_hw_mpy=none --rom_model -o "CAPSTONE_FINAL.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 
@@ -178,8 +178,8 @@ CAPSTONE_FINAL.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "bluetooth.obj" "main.obj" "MSP430FR2xx_4xx/adc.obj" "MSP430FR2xx_4xx/crc.obj" "MSP430FR2xx_4xx/cs.obj" "MSP430FR2xx_4xx/ecomp.obj" "MSP430FR2xx_4xx/eusci_a_spi.obj" "MSP430FR2xx_4xx/eusci_a_uart.obj" "MSP430FR2xx_4xx/eusci_b_i2c.obj" "MSP430FR2xx_4xx/eusci_b_spi.obj" "MSP430FR2xx_4xx/framctl.obj" "MSP430FR2xx_4xx/gpio.obj" "MSP430FR2xx_4xx/icc.obj" "MSP430FR2xx_4xx/lcd_e.obj" "MSP430FR2xx_4xx/mpy32.obj" "MSP430FR2xx_4xx/pmm.obj" "MSP430FR2xx_4xx/rtc.obj" "MSP430FR2xx_4xx/sac.obj" "MSP430FR2xx_4xx/sfr.obj" "MSP430FR2xx_4xx/sysctl.obj" "MSP430FR2xx_4xx/tia.obj" "MSP430FR2xx_4xx/timer_a.obj" "MSP430FR2xx_4xx/timer_b.obj" "MSP430FR2xx_4xx/tlv.obj" "MSP430FR2xx_4xx/wdt_a.obj" 
-	-$(RM) "bluetooth.d" "main.d" "MSP430FR2xx_4xx/adc.d" "MSP430FR2xx_4xx/crc.d" "MSP430FR2xx_4xx/cs.d" "MSP430FR2xx_4xx/ecomp.d" "MSP430FR2xx_4xx/eusci_a_spi.d" "MSP430FR2xx_4xx/eusci_a_uart.d" "MSP430FR2xx_4xx/eusci_b_i2c.d" "MSP430FR2xx_4xx/eusci_b_spi.d" "MSP430FR2xx_4xx/framctl.d" "MSP430FR2xx_4xx/gpio.d" "MSP430FR2xx_4xx/icc.d" "MSP430FR2xx_4xx/lcd_e.d" "MSP430FR2xx_4xx/mpy32.d" "MSP430FR2xx_4xx/pmm.d" "MSP430FR2xx_4xx/rtc.d" "MSP430FR2xx_4xx/sac.d" "MSP430FR2xx_4xx/sfr.d" "MSP430FR2xx_4xx/sysctl.d" "MSP430FR2xx_4xx/tia.d" "MSP430FR2xx_4xx/timer_a.d" "MSP430FR2xx_4xx/timer_b.d" "MSP430FR2xx_4xx/tlv.d" "MSP430FR2xx_4xx/wdt_a.d" 
+	-$(RM) "bluetooth_motor_sensor_setup.obj" "main.obj" "MSP430FR2xx_4xx/adc.obj" "MSP430FR2xx_4xx/crc.obj" "MSP430FR2xx_4xx/cs.obj" "MSP430FR2xx_4xx/ecomp.obj" "MSP430FR2xx_4xx/eusci_a_spi.obj" "MSP430FR2xx_4xx/eusci_a_uart.obj" "MSP430FR2xx_4xx/eusci_b_i2c.obj" "MSP430FR2xx_4xx/eusci_b_spi.obj" "MSP430FR2xx_4xx/framctl.obj" "MSP430FR2xx_4xx/gpio.obj" "MSP430FR2xx_4xx/icc.obj" "MSP430FR2xx_4xx/lcd_e.obj" "MSP430FR2xx_4xx/mpy32.obj" "MSP430FR2xx_4xx/pmm.obj" "MSP430FR2xx_4xx/rtc.obj" "MSP430FR2xx_4xx/sac.obj" "MSP430FR2xx_4xx/sfr.obj" "MSP430FR2xx_4xx/sysctl.obj" "MSP430FR2xx_4xx/tia.obj" "MSP430FR2xx_4xx/timer_a.obj" "MSP430FR2xx_4xx/timer_b.obj" "MSP430FR2xx_4xx/tlv.obj" "MSP430FR2xx_4xx/wdt_a.obj" 
+	-$(RM) "bluetooth_motor_sensor_setup.d" "main.d" "MSP430FR2xx_4xx/adc.d" "MSP430FR2xx_4xx/crc.d" "MSP430FR2xx_4xx/cs.d" "MSP430FR2xx_4xx/ecomp.d" "MSP430FR2xx_4xx/eusci_a_spi.d" "MSP430FR2xx_4xx/eusci_a_uart.d" "MSP430FR2xx_4xx/eusci_b_i2c.d" "MSP430FR2xx_4xx/eusci_b_spi.d" "MSP430FR2xx_4xx/framctl.d" "MSP430FR2xx_4xx/gpio.d" "MSP430FR2xx_4xx/icc.d" "MSP430FR2xx_4xx/lcd_e.d" "MSP430FR2xx_4xx/mpy32.d" "MSP430FR2xx_4xx/pmm.d" "MSP430FR2xx_4xx/rtc.d" "MSP430FR2xx_4xx/sac.d" "MSP430FR2xx_4xx/sfr.d" "MSP430FR2xx_4xx/sysctl.d" "MSP430FR2xx_4xx/tia.d" "MSP430FR2xx_4xx/timer_a.d" "MSP430FR2xx_4xx/timer_b.d" "MSP430FR2xx_4xx/tlv.d" "MSP430FR2xx_4xx/wdt_a.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

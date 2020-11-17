@@ -3,7 +3,7 @@
 MSP430FR2xx_4xx/sysctl.obj: ../MSP430FR2xx_4xx/sysctl.c
 MSP430FR2xx_4xx/sysctl.obj: ../MSP430FR2xx_4xx/inc/hw_memmap.h
 MSP430FR2xx_4xx/sysctl.obj: /Applications/ti/ccs1011/ccs/ccs_base/msp430/include/msp430.h
-MSP430FR2xx_4xx/sysctl.obj: /Applications/ti/ccs1011/ccs/ccs_base/msp430/include/msp430fr2111.h
+MSP430FR2xx_4xx/sysctl.obj: /Applications/ti/ccs1011/ccs/ccs_base/msp430/include/msp430fr2311.h
 MSP430FR2xx_4xx/sysctl.obj: /Applications/ti/ccs1011/ccs/ccs_base/msp430/include/in430.h
 MSP430FR2xx_4xx/sysctl.obj: /Applications/ti/ccs1011/ccs/tools/compiler/ti-cgt-msp430_20.2.1.LTS/include/intrinsics.h
 MSP430FR2xx_4xx/sysctl.obj: /Applications/ti/ccs1011/ccs/tools/compiler/ti-cgt-msp430_20.2.1.LTS/include/intrinsics_legacy_undefs.h
@@ -25,7 +25,7 @@ MSP430FR2xx_4xx/sysctl.obj: /Applications/ti/ccs1011/ccs/tools/compiler/ti-cgt-m
 ../MSP430FR2xx_4xx/sysctl.c: 
 ../MSP430FR2xx_4xx/inc/hw_memmap.h: 
 /Applications/ti/ccs1011/ccs/ccs_base/msp430/include/msp430.h: 
-/Applications/ti/ccs1011/ccs/ccs_base/msp430/include/msp430fr2111.h: 
+/Applications/ti/ccs1011/ccs/ccs_base/msp430/include/msp430fr2311.h: 
 /Applications/ti/ccs1011/ccs/ccs_base/msp430/include/in430.h: 
 /Applications/ti/ccs1011/ccs/tools/compiler/ti-cgt-msp430_20.2.1.LTS/include/intrinsics.h: 
 /Applications/ti/ccs1011/ccs/tools/compiler/ti-cgt-msp430_20.2.1.LTS/include/intrinsics_legacy_undefs.h: 

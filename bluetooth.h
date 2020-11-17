@@ -1,5 +1,5 @@
-#ifndef USCI_UART_H
-#define USCI_UART_H
+#ifndef BLUETOOTH_H
+#define BLUETOOTH_H
 
 #include <msp430.h>
 #include <stddef.h>
@@ -28,7 +28,7 @@
 #define SET_TRANSMIT_AS_AN_OUTPUT       USCIA0_TRANSMIT_DDR |= USCIA0_TRANSMIT_BIT
 
 
-void InitializeUART();
+void InitializePins();
 void UARTSendByte(unsigned char SendValue);
 unsigned char UARTReceiveByte();
 void UARTSendString(unsigned char *str);
