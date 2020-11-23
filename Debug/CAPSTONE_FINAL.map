@@ -1,10 +1,10 @@
 ******************************************************************************
                   MSP430 Linker Unix v20.2.1                   
 ******************************************************************************
->> Linked Tue Nov 17 16:24:38 2020
+>> Linked Mon Nov 23 18:12:28 2020
 
 OUTPUT FILE NAME:   <CAPSTONE_FINAL.out>
-ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 0000f5bc
+ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 0000f536
 
 
 MEMORY CONFIGURATION
@@ -13,7 +13,7 @@ MEMORY CONFIGURATION
 ----------------------  --------  ---------  --------  --------  ----  --------
   BSL0                  00001000   00000800  00000000  00000800  RWIX
   RAM                   00002000   00000400  000000a4  0000035c  RWIX
-  FRAM                  0000f100   00000e80  000004f6  0000098a  RWIX
+  FRAM                  0000f100   00000e80  00000484  000009fc  RWIX
   JTAGSIGNATURE         0000ff80   00000004  00000004  00000000  RWIX  ffff 
   BSLSIGNATURE          0000ff84   00000004  00000004  00000000  RWIX  ffff 
   INT00                 0000ff88   00000002  00000000  00000002  RWIX
@@ -106,33 +106,32 @@ section   page    origin      length       input sections
 .mspabi.extab 
 *          0    0000f128    00000000     UNINITIALIZED
 
-.const     0    0000f128    000000a0     
-                  0000f128    000000a0     main.obj (.const:.string)
+.const     0    0000f128    0000003a     
+                  0000f128    0000003a     main.obj (.const:.string)
 
-.text      0    0000f1c8    000003cc     
-                  0000f1c8    000000ee     rts430x_lc_sd_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
-                  0000f2b6    000000ae     main.obj (.text:main)
-                  0000f364    00000076     bluetooth_motor_sensor_setup.obj (.text:InitializePins)
-                  0000f3da    0000006a     rts430x_lc_sd_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit_hold_wdt:__TI_auto_init_nobinit_nopinit_hold_wdt)
-                  0000f444    00000040                            : cpy_util.asm.obj (.text:__memcpy_far)
-                  0000f484    0000003e                            : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
-                  0000f4c2    0000003c                            : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
-                  0000f4fe    00000036     main.obj (.text:motorTurns)
-                  0000f534    00000018     bluetooth_motor_sensor_setup.obj (.text:UARTSendString)
-                  0000f54c    00000014     bluetooth_motor_sensor_setup.obj (.text:UARTReceiveByte)
-                  0000f560    00000014     bluetooth_motor_sensor_setup.obj (.text:UARTSendByte)
-                  0000f574    0000000e     main.obj (.text:exitFunction)
-                  0000f582    00000006     pmm.obj (.text:PMM_unlockLPM5)
-                  0000f588    00000006     rts430x_lc_sd_eabi.lib : exit.c.obj (.text:abort)
-                  0000f58e    00000004                            : pre_init.c.obj (.text:_system_pre_init)
-                  0000f592    00000002                            : startup.c.obj (.text:_system_post_cinit)
+.text      0    0000f162    000003d4     
+                  0000f162    000000ee     rts430x_lc_sd_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
+                  0000f250    000000b6     main.obj (.text:main)
+                  0000f306    00000078     bluetooth_motor_sensor_setup.obj (.text:InitializePins)
+                  0000f37e    0000006a     rts430x_lc_sd_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit_hold_wdt:__TI_auto_init_nobinit_nopinit_hold_wdt)
+                  0000f3e8    00000042     main.obj (.text:motorTurns)
+                  0000f42a    00000040     rts430x_lc_sd_eabi.lib : cpy_util.asm.obj (.text:__memcpy_far)
+                  0000f46a    0000003e                            : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
+                  0000f4a8    0000003c                            : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
+                  0000f4e4    00000018     bluetooth_motor_sensor_setup.obj (.text:UARTSendString)
+                  0000f4fc    00000014     bluetooth_motor_sensor_setup.obj (.text:UARTReceiveByte)
+                  0000f510    00000014     bluetooth_motor_sensor_setup.obj (.text:UARTSendByte)
+                  0000f524    00000006     pmm.obj (.text:PMM_unlockLPM5)
+                  0000f52a    00000006     rts430x_lc_sd_eabi.lib : exit.c.obj (.text:abort)
+                  0000f530    00000004                            : pre_init.c.obj (.text:_system_pre_init)
+                  0000f534    00000002                            : startup.c.obj (.text:_system_post_cinit)
 
 .text:_isr 
-*          0    0000f594    00000062     
-                  0000f594    00000028     main.obj (.text:_isr:USCIAB0RX_ISR)
-                  0000f5bc    0000001c     rts430x_lc_sd_eabi.lib : boot.c.obj (.text:_isr:_c_int00_noargs)
-                  0000f5d8    00000016     main.obj (.text:_isr:Port_1)
-                  0000f5ee    00000008     rts430x_lc_sd_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
+*          0    0000f536    0000004e     
+                  0000f536    0000001c     rts430x_lc_sd_eabi.lib : boot.c.obj (.text:_isr:_c_int00_noargs)
+                  0000f552    00000018     main.obj (.text:_isr:Port_1)
+                  0000f56a    00000012     main.obj (.text:_isr:USCIAB0RX_ISR)
+                  0000f57c    00000008     rts430x_lc_sd_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
 
 .bss       0    00002000    00000002     UNINITIALIZED
                   00002000    00000002     (.common:num_turns)
@@ -204,10 +203,10 @@ MODULE SUMMARY
        Module                             code   ro data   rw data
        ------                             ----   -------   -------
     ./
-       main.obj                           304    164       4      
-       bluetooth_motor_sensor_setup.obj   182    0         0      
+       main.obj                           290    62        4      
+       bluetooth_motor_sensor_setup.obj   184    0         0      
     +--+----------------------------------+------+---------+---------+
-       Total:                             486    164       4      
+       Total:                             474    62        4      
                                                                   
     ./MSP430FR2xx_4xx/
        pmm.obj                            6      0         0      
@@ -243,7 +242,7 @@ MODULE SUMMARY
        Stack:                             0      0         160    
        Linker Generated:                  0      40        0      
     +--+----------------------------------+------+---------+---------+
-       Grand Total:                       1070   230       164    
+       Grand Total:                       1058   128       164    
 
 
 LINKER GENERATED COPY TABLES
@@ -343,7 +342,7 @@ address   name
 00000672  BAKMEM9                                
 00000673  BAKMEM9_H                              
 00000672  BAKMEM9_L                              
-0000f588  C$$EXIT                                
+0000f52a  C$$EXIT                                
 000002ee  CAPTIOCTL                              
 000002ef  CAPTIOCTL_H                            
 000002ee  CAPTIOCTL_L                            
@@ -413,7 +412,7 @@ address   name
 000001a6  GCCTL1                                 
 000001a7  GCCTL1_H                               
 000001a6  GCCTL1_L                               
-0000f364  InitializePins                         
+0000f306  InitializePins                         
 00000204  P1DIR                                  
 0000021a  P1IE                                   
 00000218  P1IES                                  
@@ -503,8 +502,8 @@ address   name
 0000012a  PMMIFG                                 
 0000012b  PMMIFG_H                               
 0000012a  PMMIFG_L                               
-0000f582  PMM_unlockLPM5                         
-0000f5d8  Port_1                                 
+0000f524  PMM_unlockLPM5                         
+0000f552  Port_1                                 
 0000030c  RTCCNT                                 
 0000030d  RTCCNT_H                               
 0000030c  RTCCNT_L                               
@@ -632,9 +631,9 @@ address   name
 00000f00  TRI0CTL                                
 00000f01  TRI0CTL_H                              
 00000f00  TRI0CTL_L                              
-0000f54c  UARTReceiveByte                        
-0000f560  UARTSendByte                           
-0000f534  UARTSendString                         
+0000f4fc  UARTReceiveByte                        
+0000f510  UARTSendByte                           
+0000f4e4  UARTSendString                         
 00000510  UCA0ABCTL                              
 00000511  UCA0ABCTL_H                            
 00000510  UCA0ABCTL_L                            
@@ -722,7 +721,7 @@ address   name
 0000054e  UCB0TXBUF                              
 0000054f  UCB0TXBUF_H                            
 0000054e  UCB0TXBUF_L                            
-0000f594  USCIAB0RX_ISR                          
+0000f56a  USCIAB0RX_ISR                          
 000001cc  WDTCTL                                 
 000001cd  WDTCTL_H                               
 000001cc  WDTCTL_L                               
@@ -732,10 +731,10 @@ address   name
 0000f128  __TI_CINIT_Limit                       
 0000f100  __TI_Handler_Table_Base                
 0000f10c  __TI_Handler_Table_Limit               
-0000f5ee  __TI_ISR_TRAP                          
-0000f3da  __TI_auto_init_nobinit_nopinit_hold_wdt
-0000f1c8  __TI_decompress_lzss                   
-0000f4c2  __TI_decompress_none                   
+0000f57c  __TI_ISR_TRAP                          
+0000f37e  __TI_auto_init_nobinit_nopinit_hold_wdt
+0000f162  __TI_decompress_lzss                   
+0000f4a8  __TI_decompress_none                   
 0000ffe2  __TI_int45                             
 0000ffe4  __TI_int46                             
 0000ffe6  __TI_int47                             
@@ -753,19 +752,18 @@ address   name
 ffffffff  __TI_pprof_out_hndl                    
 ffffffff  __TI_prof_data_size                    
 ffffffff  __TI_prof_data_start                   
-0000f484  __TI_zero_init_nomemset                
+0000f46a  __TI_zero_init_nomemset                
 ffffffff  __c_args__                             
-0000f444  __memcpy_far                           
-0000f5bc  _c_int00_noargs                        
+0000f42a  __memcpy_far                           
+0000f536  _c_int00_noargs                        
 0000fffe  _reset_vector                          
 00002360  _stack                                 
-0000f592  _system_post_cinit                     
-0000f58e  _system_pre_init                       
-0000f588  abort                                  
-0000f574  exitFunction                           
+0000f534  _system_post_cinit                     
+0000f530  _system_pre_init                       
+0000f52a  abort                                  
 00002003  loggedIn                               
-0000f2b6  main                                   
-0000f4fe  motorTurns                             
+0000f250  main                                   
+0000f3e8  motorTurns                             
 00002000  num_turns                              
 
 
@@ -1235,27 +1233,26 @@ address   name
 0000f10c  __TI_Handler_Table_Limit               
 0000f118  __TI_CINIT_Base                        
 0000f128  __TI_CINIT_Limit                       
-0000f1c8  __TI_decompress_lzss                   
-0000f2b6  main                                   
-0000f364  InitializePins                         
-0000f3da  __TI_auto_init_nobinit_nopinit_hold_wdt
-0000f444  __memcpy_far                           
-0000f484  __TI_zero_init_nomemset                
-0000f4c2  __TI_decompress_none                   
-0000f4fe  motorTurns                             
-0000f534  UARTSendString                         
-0000f54c  UARTReceiveByte                        
-0000f560  UARTSendByte                           
-0000f574  exitFunction                           
-0000f582  PMM_unlockLPM5                         
-0000f588  C$$EXIT                                
-0000f588  abort                                  
-0000f58e  _system_pre_init                       
-0000f592  _system_post_cinit                     
-0000f594  USCIAB0RX_ISR                          
-0000f5bc  _c_int00_noargs                        
-0000f5d8  Port_1                                 
-0000f5ee  __TI_ISR_TRAP                          
+0000f162  __TI_decompress_lzss                   
+0000f250  main                                   
+0000f306  InitializePins                         
+0000f37e  __TI_auto_init_nobinit_nopinit_hold_wdt
+0000f3e8  motorTurns                             
+0000f42a  __memcpy_far                           
+0000f46a  __TI_zero_init_nomemset                
+0000f4a8  __TI_decompress_none                   
+0000f4e4  UARTSendString                         
+0000f4fc  UARTReceiveByte                        
+0000f510  UARTSendByte                           
+0000f524  PMM_unlockLPM5                         
+0000f52a  C$$EXIT                                
+0000f52a  abort                                  
+0000f530  _system_pre_init                       
+0000f534  _system_post_cinit                     
+0000f536  _c_int00_noargs                        
+0000f552  Port_1                                 
+0000f56a  USCIAB0RX_ISR                          
+0000f57c  __TI_ISR_TRAP                          
 0000ffe2  __TI_int45                             
 0000ffe4  __TI_int46                             
 0000ffe6  __TI_int47                             
@@ -1276,4 +1273,4 @@ ffffffff  __TI_prof_data_size
 ffffffff  __TI_prof_data_start                   
 ffffffff  __c_args__                             
 
-[502 symbols]
+[501 symbols]

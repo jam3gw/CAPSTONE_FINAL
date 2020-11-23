@@ -23,6 +23,9 @@ void InitializePins()
     SET_RECEIVE_AS_AN_INPUT;
     SET_TRANSMIT_AS_AN_OUTPUT;
 
+//    SET_STATE_AS_AN_OUTPUT;
+//    SET_EN_AS_AN_OUTPUT;
+
     //motor
     SET_SLEEP_AS_AN_OUTPUT;
     SET_NENBL_AS_AN_OUTPUT;

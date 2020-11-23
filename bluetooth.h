@@ -27,6 +27,16 @@
 #define USCIA0_TRANSMIT_DDR             P1DIR
 #define SET_TRANSMIT_AS_AN_OUTPUT       USCIA0_TRANSMIT_DDR |= USCIA0_TRANSMIT_BIT
 
+#define BLUETOOTH_EN_BIT              BIT5
+#define BLUETOOTH_EN_PORT             P1OUT
+#define BLUETOOTH_EN_DDR              P1DIR
+#define SET_EN_AS_AN_OUTPUT           BLUETOOTH_EN_DDR |= BLUETOOTH_EN_BIT
+
+#define BLUETOOTH_STATE_BIT              BIT0
+#define BLUETOOTH_STATE_PORT             P2OUT
+#define BLUETOOTH_STATE_DDR              P2DIR
+#define SET_STATE_AS_AN_OUTPUT           BLUETOOTH_STATE_DDR |= BLUETOOTH_STATE_BIT
+
 
 void InitializePins();
 void UARTSendByte(unsigned char SendValue);

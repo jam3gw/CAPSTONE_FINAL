@@ -42,6 +42,8 @@ int main(void)
 ////            P1OUT ^= BIT0;                      // P1.0 = toggle
 //        }
 
+//    BLUETOOTH_EN_PORT |= BLUETOOTH_EN_BIT;
+//    BLUETOOTH_STATE_PORT &= ~BLUETOOTH_STATE_BIT;
 
    while(1){
        ENABLE_SLEEP; //set sleep high
@@ -57,32 +59,36 @@ int main(void)
 //        UARTSendString("Please select what size you would like: (s for Small, m for Medium, l for Large, and x to Exit)\r\n");
 
         while (ReceivedValue == '\0');
+//       ReceivedValue = '1';
 
         switch (ReceivedValue){
-            case 's':
+            case '1':
                 ReceivedValue = '\0';
                 motorTurns(1);
-                UARTSendString("Dispensed a Small serving\r\n");
+                UARTSendString("Successfully Dispensed");
                 exitFunction();
                 break;
-            case 'm':
+            case '2':
 
                 ReceivedValue = '\0';
                 motorTurns(2);
-                UARTSendString("Dispensed a Medium serving\n\r");
+                UARTSendString("Successfully Dispensed");
                 exitFunction();
                 break;
-            case 'l':
+            case '3':
                 ReceivedValue = '\0';
                 motorTurns(3);
-                UARTSendString("Dispensing a Large serving\n\r");
+                UARTSendString("Successfully Dispensed");
                 exitFunction();
                 break;
-            case 'x':
+            case '4':
+                ReceivedValue = '\0';
+                motorTurns(4);
+                UARTSendString("Successfully Dispensed");
                 exitFunction();
                 break;
             default:
-                UARTSendString("Please select a different choice\n\r");
+                UARTSendString("Please select a different choice");
                 ReceivedValue = '\0';
                 break;
         }
@@ -92,6 +98,7 @@ int main(void)
 }
 
 void motorTurns(int turns){
+    num_turns = turns;
     while(num_turns){
         DISABLE_STEP;
         _delay_cycles(10000);
@@ -104,8 +111,7 @@ void motorTurns(int turns){
 }
 
 void exitFunction() {
-    UARTSendString("Please disconnect your device...\r\n");
-    loggedIn = false;
+//    UARTSendString("Please disconnect your device...\r\n");
     return;
 }
 
@@ -114,10 +120,10 @@ __interrupt
 void USCIAB0RX_ISR(void)
 {
     ReceivedValue = UARTReceiveByte();   // read user input
-    if ((ReceivedValue == 'N') && (!loggedIn)) {
-        loggedIn = true;
-        ReceivedValue = '\0';
-    }
+//    if ((ReceivedValue == 'N') && (!loggedIn)) {
+//        loggedIn = true;
+//        ReceivedValue = '\0';
+//    }
     UCA0IFG &= ~UCRXIFG;
 }
 
