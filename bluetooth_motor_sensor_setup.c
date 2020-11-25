@@ -16,17 +16,16 @@ void InitializePins()
                                                   // UCBRSx value = 0xD6 (See UG)
     UCA0BR1 = 0;
 
-    // Configure GPIO
-    P1SEL1 &= ~(BIT6 | BIT7);                 // USCI_A0 UART operation
+    P1SEL1 &= ~(BIT6 | BIT7);        // USCI_A0 UART operation
     P1SEL0 |= BIT6 | BIT7;
 
     SET_RECEIVE_AS_AN_INPUT;
     SET_TRANSMIT_AS_AN_OUTPUT;
 
-//    SET_STATE_AS_AN_OUTPUT;
-//    SET_EN_AS_AN_OUTPUT;
+//    SET_STATE_AS_AN_OUTPUT; // Bluetooth state pin (not needed)
+//    SET_EN_AS_AN_OUTPUT; // Bluetooth enable pin (not needed)
 
-    //motor
+    // Motor Configurations
     SET_SLEEP_AS_AN_OUTPUT;
     SET_NENBL_AS_AN_OUTPUT;
     SET_STEP_AS_AN_OUTPUT;
@@ -36,22 +35,19 @@ void InitializePins()
     SET_CONFIG_AS_AN_OUTPUT;
     SET_NFAULT_AS_AN_INPUT;
 
-    // need to configure Reset and EN pins for bluetooth
 
-    // Hall Effect Sensor
+    // Hall Effect Sensor Configuration
     SET_SENSOR_AS_AN_INPUT;
 
-    UCA0TXBUF = 0; // initialize transmit buffer to 0
+    UCA0TXBUF = 0; // initialize transmit buffer to 0 (for UART communication with Bluetooth)
 
-    UCA0CTL1 &= ~UCSWRST;   // Initialize eUSCI
+    UCA0CTL1 &= ~UCSWRST;   // Initialize eUSCI (gets out of Reset state)
 
     UCA0IE |= UCRXIE;   // Enable USCI_A0 RX interrupt
 
     P1IE |= SENSOR_BIT; // Enable HallEffectSensor Interrupt
     P1IES |= SENSOR_BIT; // make interrupt falling edge
     P1IFG &= ~SENSOR_BIT; // Clear interrupt flag
-
-    //UCA0IE |= UCTXIE;                         // Enable USCI_A0 TX interrupt (NOT NEEDED)
 }
 
 void UARTSendByte(unsigned char SendValue)

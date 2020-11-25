@@ -5,7 +5,6 @@
 #include <sensor.h>
 
 volatile unsigned char ReceivedValue = '\0';
-volatile bool loggedIn = false;
 int num_turns;
 
 void exitFunction(void);
@@ -13,18 +12,11 @@ void motorTurns(int turns);
 
 int main(void)
 {
-    WDTCTL = WDTPW | WDTHOLD;
-    //WDTCTL = WDTPW | WDTHOLD; // stop watchdog timer
+    WDTCTL = WDTPW | WDTHOLD; // stop watchdog timer
+
 
     PMM_unlockLPM5();
 
-//  /* Use Calibration values for 1MHz Clock DCO*/
-//  DCOCTL = 0;
-//  BCSCTL1 = CALBC1_1MHZ;
-//  DCOCTL = CALDCO_1MHZ;
-    //ConfigureClockModule();
-
-    //initClockTo16MHz();
     InitializePins(); // initializes bluetooth, sensor, and motor connection with msp
 
     //USCIA0_RESET_PORT |= USCIA0_RESET_BIT;
@@ -53,13 +45,8 @@ int main(void)
        LOW_M0;
        LOW_M1;
        DISABLE_STEP;
-           // read user input
-//        while (!loggedIn);
 
-//        UARTSendString("Please select what size you would like: (s for Small, m for Medium, l for Large, and x to Exit)\r\n");
-
-        while (ReceivedValue == '\0');
-//       ReceivedValue = '1';
+        while (ReceivedValue == '\0'); // wait until user connects to the device and sends a value
 
         switch (ReceivedValue){
             case '1':
@@ -110,8 +97,8 @@ void motorTurns(int turns){
     return;
 }
 
+// called at exit of every selection
 void exitFunction() {
-//    UARTSendString("Please disconnect your device...\r\n");
     return;
 }
 
@@ -120,10 +107,7 @@ __interrupt
 void USCIAB0RX_ISR(void)
 {
     ReceivedValue = UARTReceiveByte();   // read user input
-//    if ((ReceivedValue == 'N') && (!loggedIn)) {
-//        loggedIn = true;
-//        ReceivedValue = '\0';
-//    }
+
     UCA0IFG &= ~UCRXIFG;
 }
 
@@ -136,6 +120,5 @@ __interrupt void Port_1(void)
     } else {
         HIGH_NENBL;
     }
-    //__bic_SR_register_on_exit(LPM3_bits);   // Exit LPM3
 }
 
