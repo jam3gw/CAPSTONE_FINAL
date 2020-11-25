@@ -7,21 +7,24 @@
 volatile unsigned char ReceivedValue = '\0';
 int num_turns;
 
-void exitFunction(void);
 void motorTurns(int turns);
 
 int main(void)
 {
     WDTCTL = WDTPW | WDTHOLD; // stop watchdog timer
 
-
     PMM_unlockLPM5();
 
     InitializePins(); // initializes bluetooth, sensor, and motor connection with msp
 
-    //USCIA0_RESET_PORT |= USCIA0_RESET_BIT;
-
     _enable_interrupts();
+
+    // default DCO frequency is 2MHz, need to divide this into a lower frequency clock for SMCLK so that TB0CCR0 can contain a value to count up to
+    CSCTL5 |= DIVM_7 | DIVS_3; // 2,000,000 / (128 * 8) = 1953.125. If TB0CCR0 is set to 2000 then we will get a timer interrupt roughly every 1 second
+    TB0CTL |= MC_0 | TBCLR; // stop timer and clear it
+    TB0CTL |= TBSSEL_2 | ID_0; // sets up Timer A0 w/ SMCLK, clock division by 1
+    TB0CCTL0 |= CCIE; // enable timer interrupt
+    TB0CCR0 = 0x4E20; // set value for counting up to until the Timer B0 interrupt occurs. We want to set it to 20,000 to give 10 seconds into motor attempt before we send failure message
 
 
     // Hall Effect Sensor
@@ -48,31 +51,28 @@ int main(void)
 
         while (ReceivedValue == '\0'); // wait until user connects to the device and sends a value
 
+        TB0CTL |= MC_1; // set Timer B to upmode
         switch (ReceivedValue){
             case '1':
                 ReceivedValue = '\0';
                 motorTurns(1);
                 UARTSendString("Successfully Dispensed");
-                exitFunction();
                 break;
             case '2':
 
                 ReceivedValue = '\0';
                 motorTurns(2);
                 UARTSendString("Successfully Dispensed");
-                exitFunction();
                 break;
             case '3':
                 ReceivedValue = '\0';
                 motorTurns(3);
                 UARTSendString("Successfully Dispensed");
-                exitFunction();
                 break;
             case '4':
                 ReceivedValue = '\0';
                 motorTurns(4);
                 UARTSendString("Successfully Dispensed");
-                exitFunction();
                 break;
             default:
                 UARTSendString("Please select a different choice");
@@ -94,11 +94,9 @@ void motorTurns(int turns){
     }
     DISABLE_STEP;
     HIGH_NENBL;
-    return;
-}
 
-// called at exit of every selection
-void exitFunction() {
+    TB0CTL |= MC_0; // stops timer b
+    TB0R &= 0; // Resets Timer B count to 0
     return;
 }
 
@@ -120,5 +118,19 @@ __interrupt void Port_1(void)
     } else {
         HIGH_NENBL;
     }
+}
+
+#pragma vector=TIMER0_B0_VECTOR
+__interrupt void Timer_B(void)
+{
+    // send error message
+    TB0CTL &= ~TBIFG; // clear Timer B0 Flag
+
+    // stop motor from attempting to turn
+    num_turns = 0;
+    DISABLE_STEP;
+    HIGH_NENBL;
+
+    UARTSendString("Error Dispensing");
 }
 
